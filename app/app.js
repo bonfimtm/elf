@@ -10,25 +10,24 @@
         // Views
         'elf.view1',
         'elf.view2',
+        'elf.app',
+        'elf.admin',
 
         // AngularJS
         'ngAnimate',
         'ngTouch',
 
         // Third-party
-        'ui.bootstrap',
-        'ui.router'
+        'firebase',
+        'ui.router',
+        'angular-loading-bar'
     ])
 
-    .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+    .config(function($urlRouterProvider, $locationProvider) {
 
         $locationProvider.hashPrefix('!');
 
-        $urlRouterProvider.otherwise('/view1');
-
-        $stateProvider.state('app', {
-            templateUrl: 'app.html'
-        });
+        $urlRouterProvider.otherwise('/');
     });
 
 })();

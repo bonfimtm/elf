@@ -1,0 +1,39 @@
+<h2><i class="fa fa-fw fa-newspaper-o"></i> Post</h2>
+
+<span ng-if="!adminPostViewCtrl.post.title">
+	<i class="fa fa-fw fa-refresh fa-spin fa-3x"></i>
+</span>
+
+<span ng-if="adminPostViewCtrl.post.title">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong ng-bind="adminPostViewCtrl.post.title"></strong>
+		</div>
+    	<div class="panel-body">
+	        <p class="lead" ng-bind="adminPostViewCtrl.post.subtitle"></p>
+	        <p ng-bind="adminPostViewCtrl.post.content"></p>
+	        <em ng-bind="adminPostViewCtrl.post.createdAt | date:'medium'"></em>
+	        &middot;
+	        <em ng-bind="adminPostViewCtrl.post.updatedAt | date:'medium'"></em>
+	        <br>
+	        <br>
+	        <p>
+	        	URL:
+	        	<span class="text-muted" ng-bind="adminPostViewCtrl.post.url"></span>
+	        <p>
+	        <p>
+	        	Published?
+	        	&nbsp;
+	        	<span ng-if="adminPostViewCtrl.post.publish">
+	        		<i class="fa fa-fw fa-check-square-o"></i> Yes
+	        	</span>
+	        	<span ng-if="!adminPostViewCtrl.post.publish">
+	        		<i class="fa fa-fw fa-square-o"></i> No
+	        	</span>
+	        </p>
+    </div>
+</span>
+
+</div>
+
+<a href ui-sref="admin.post.list" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i> Back</a>

@@ -1,0 +1,45 @@
+<h2><i class="fa fa-fw fa-newspaper-o"></i> New Post</h2>
+
+<form novalidate role="form" name="adminPostNewCtrl.form" ng-submit="adminPostNewCtrl.submit()">
+	<legend>Create a new Post</legend>
+
+	<div class="form-group">
+		<label for="title">Title</label>
+		<input type="text" class="form-control" id="title" placeholder="Title"
+				required
+				ng-model="adminPostNewCtrl.post.title">
+	</div>
+
+	<div class="form-group">
+		<label for="subtitle">Subtitle</label>
+		<input type="text" class="form-control" id="subtitle" placeholder="Subtitle"
+				ng-model="adminPostNewCtrl.post.subtitle">
+	</div>
+
+	<div class="form-group">
+		<label for="content">Content</label>
+		<textarea type="text" class="form-control" id="content" placeholder="Content" rows="15"
+					required
+					ng-model="adminPostNewCtrl.post.content"></textarea>
+	</div>
+
+	<div class="form-group">
+		<label>Publish?</label>
+		&nbsp;
+		<label class="radio-inline">
+		  <input type="radio" name="publish" id="publishYes" required
+		  			ng-model="adminPostNewCtrl.post.publish" ng-value="true">
+		  Yes
+		</label>
+		<label class="radio-inline">
+		  <input type="radio" name="publish" id="publishNo" required
+		  			ng-model="adminPostNewCtrl.post.publish" ng-value="false">
+		  No
+		</label>
+	</div>
+
+	<a href ui-sref="admin.post.list" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i> Back</a>
+	<button type="submit" class="btn btn-success" ng-disabled="adminPostNewCtrl.form.$invalid || adminPostNewCtrl.loading">
+		<i ng-class="adminPostNewCtrl.loading ? 'fa fa-fw fa-refresh fa-spin' : 'fa fa-fw fa-floppy-o'"></i> Save
+	</button>
+</form>

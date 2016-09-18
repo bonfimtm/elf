@@ -1,0 +1,51 @@
+<h2><i class="fa fa-fw fa-newspaper-o"></i> Edit Post</h2>
+
+<span ng-if="!adminPostEditCtrl.post.title">
+	<i class="fa fa-fw fa-refresh fa-spin fa-3x"></i>
+</span>
+
+<span ng-if="adminPostEditCtrl.post.title">
+	<form novalidate role="form" name="adminPostEditCtrl.form" ng-submit="adminPostEditCtrl.submit()">
+		<legend>Edit a Post</legend>
+
+		<div class="form-group">
+			<label for="title">Title</label>
+			<input type="text" class="form-control" id="title" placeholder="Title"
+					required
+					ng-model="adminPostEditCtrl.post.title">
+		</div>
+
+		<div class="form-group">
+			<label for="subtitle">Subtitle</label>
+			<input type="text" class="form-control" id="subtitle" placeholder="Subtitle"
+					ng-model="adminPostEditCtrl.post.subtitle">
+		</div>
+
+		<div class="form-group">
+			<label for="content">Content</label>
+			<textarea type="text" class="form-control" id="content" placeholder="Content" rows="15"
+						required
+						ng-model="adminPostEditCtrl.post.content"></textarea>
+		</div>
+
+		<div class="form-group">
+			<label>Publish?</label>
+			&nbsp;
+			<label class="radio-inline">
+			  <input type="radio" name="publish" id="publishYes" required
+			  			ng-model="adminPostEditCtrl.post.publish" ng-value="true">
+			  Yes
+			</label>
+			<label class="radio-inline">
+			  <input type="radio" name="publish" id="publishNo" required
+			  			ng-model="adminPostEditCtrl.post.publish" ng-value="false">
+			  No
+			</label>
+		</div>
+
+		<a href ui-sref="admin.post.list" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i> Back</a>
+		<button type="submit" class="btn btn-success" ng-disabled="adminPostEditCtrl.form.$invalid || adminPostEditCtrl.loading">
+			<i ng-class="adminPostEditCtrl.loading ? 'fa fa-fw fa-refresh fa-spin' : 'fa fa-fw fa-floppy-o'"></i> Save
+		</button>
+	</form>
+</span>
