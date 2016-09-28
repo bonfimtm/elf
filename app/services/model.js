@@ -66,6 +66,10 @@
             return $firebaseArray(ref.orderByChild("updatedAt"));
         };
 
+        elements.findAllPublished = function() {
+            return $firebaseArray(ref.orderByChild("publish").startAt(true).endAt(true));
+        };
+
         elements.findLastTen = function() {
             return $firebaseArray(ref.orderByChild("updatedAt").limitToLast(10));
         };

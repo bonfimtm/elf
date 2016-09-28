@@ -5,7 +5,7 @@
 
     .config(function($stateProvider) {
         
-        $stateProvider.state('app.view1', {
+        $stateProvider.state('main.view1', {
             url: '/view1',
             templateUrl: 'views/view1/view1.html'
         });

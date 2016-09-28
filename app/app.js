@@ -8,10 +8,10 @@
         'elf.version',
 
         // Views
+        'elf.main',
+        'elf.admin',
         'elf.view1',
         'elf.view2',
-        'elf.app',
-        'elf.admin',
 
         // AngularJS
         'ngAnimate',

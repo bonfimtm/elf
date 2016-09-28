@@ -3,7 +3,7 @@
 
     // Declare app level module which depends on views, and components
     angular.module('elf.admin', [
-        
+
         // Views
         'elf.admin.home',
         'elf.admin.post.list',

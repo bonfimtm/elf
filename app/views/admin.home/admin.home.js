@@ -14,6 +14,5 @@
     })
 
     .controller('AdminHomeCtrl', [function() {
-
     }]);
 })();
