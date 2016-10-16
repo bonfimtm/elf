@@ -6,6 +6,7 @@
 
         // Views
         'elf.main.home',
+        'elf.main.post',
 
         // AngularJS
         'ngAnimate',

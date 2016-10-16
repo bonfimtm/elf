@@ -70,6 +70,10 @@
         elements.findLastTen = function() {
             return $firebaseArray(ref.orderByChild("updatedAt").limitToLast(10));
         };
+
+        elements.findByURL = function(url) {
+            return $firebaseArray(ref.orderByChild("url").equalTo(url));
+        };
     }]);
 
 })();
