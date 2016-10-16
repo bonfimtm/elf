@@ -8,6 +8,12 @@
         'firebase'
     ])
 
+    .factory("Auth", ["$firebaseAuth",
+        function($firebaseAuth) {
+            return $firebaseAuth();
+        }
+    ])
+
     .factory("Post", ["$firebaseObject",
 
         function($firebaseObject) {
@@ -35,7 +41,7 @@
                 };
 
                 obj.$edit = function() {
-                    
+
                     var now = new Date().getTime();
                     obj.updatedAt = now;
 
@@ -51,11 +57,6 @@
         }
     ])
 
-    // .factory("PostArray", ["$firebaseArray", function("$firebaseArray") {
-    //     return function() {
-    //     };
-    // }])
-
     .service("posts", ["$firebaseArray", function($firebaseArray) {
 
         var ref = firebase.database().ref("posts")
@@ -64,10 +65,6 @@
 
         elements.findAll = function() {
             return $firebaseArray(ref.orderByChild("updatedAt"));
-        };
-
-        elements.findAllPublished = function() {
-            return $firebaseArray(ref.orderByChild("publish").startAt(true).endAt(true));
         };
 
         elements.findLastTen = function() {

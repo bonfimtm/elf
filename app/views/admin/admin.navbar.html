@@ -4,7 +4,7 @@
     }
 </style>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="AdminNavbarCtrl as adminNavbarCtrl">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -14,21 +14,27 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ui-sref="admin.home">Elf</a>
+      <a class="navbar-brand" ui-sref="main.home">Elf</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
       <ul class="nav navbar-nav">
+        <li ui-sref-active="active"><a ui-sref="admin.home">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav">
         <li ui-sref-active="active"><a ui-sref="admin.post.list">Posts</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" uib-dropdown is-open="userMenu">
-          <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle ng-disabled="disabled">User <span class="caret"></span></a>
+          <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" uib-dropdown-toggle ng-disabled="disabled">
+            {{ adminNavbarCtrl.currentUserEmail }}
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu" uib-dropdown-menu role="menu">
             <li><a ui-sref="admin.home">Change Password</a></li>
             <li role="separator" class="divider"></li>
-            <li><a ui-sref="main.home">Sign Out</a></li>
+            <li><a href ng-click="adminNavbarCtrl.logout()">Sign Out</a></li>
           </ul>
         </li>
       </ul>

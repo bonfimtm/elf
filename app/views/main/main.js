@@ -16,7 +16,7 @@
         'ui.router'
     ])
 
-    .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+    .config(function($stateProvider) {
 
         $stateProvider.state('main', {
             templateUrl: 'views/main/main.html',

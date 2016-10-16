@@ -19,7 +19,7 @@
 
         mainHomeCtrl.init = function() {
             mainHomeCtrl.loading = true;
-            mainHomeCtrl.posts = posts.findAllPublished();
+            mainHomeCtrl.posts = posts.findAll();
 
             mainHomeCtrl.posts.$loaded()
                 .then(function(data) {

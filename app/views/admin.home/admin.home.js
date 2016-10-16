@@ -13,6 +13,7 @@
         });
     })
 
-    .controller('AdminHomeCtrl', [function() {
+    .controller('AdminHomeCtrl', ['currentAuth', function(currentAuth) {
+        console.log(currentAuth.email);
     }]);
 })();
