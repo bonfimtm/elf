@@ -38,6 +38,15 @@
 
         adminPostNewCtrl.init = function() {
             adminPostNewCtrl.post = new Post();
+
+            adminPostNewCtrl.initForm();
+        };
+
+        adminPostNewCtrl.initForm = function() {
+            if (adminPostNewCtrl.form) {
+                adminPostNewCtrl.form.$setPristine();
+                adminPostNewCtrl.form.$setUntouched();
+            }
         };
 
         adminPostNewCtrl.init();

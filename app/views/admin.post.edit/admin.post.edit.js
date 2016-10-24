@@ -36,7 +36,7 @@
                 });
         };
 
-        (adminPostEditCtrl.init = function() {
+        adminPostEditCtrl.init = function() {
             if ($stateParams.id) {
                 adminPostEditCtrl.post = Post($stateParams.id);
 
@@ -55,7 +55,9 @@
                 $log.error("Invalid URL");
                 toastr.error('Invalid URL');
             }
-        })();
+        };
+
+        adminPostEditCtrl.init();
 
     }]);
 })();

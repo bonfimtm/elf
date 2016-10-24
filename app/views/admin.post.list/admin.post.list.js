@@ -13,7 +13,7 @@
         });
     })
 
-    .controller('AdminPostListCtrl', ['$log', 'posts', 'toastr', 'NgTableParams', function($log, posts, toastr, NgTableParams) {
+    .controller('AdminPostListCtrl', ['$log', 'Post', 'posts', 'toastr', 'NgTableParams', function($log, Post, posts, toastr, NgTableParams) {
 
         var adminPostListCtrl = this;
 
@@ -23,9 +23,9 @@
         adminPostListCtrl.posts.$loaded()
             .then(function(data) {
                 $log.log(data);
-                adminPostListCtrl.tableParams = new NgTableParams({}, {
-                  dataset: data
-                });
+                // adminPostListCtrl.tableParams = new NgTableParams({}, {
+                //   dataset: data
+                // });
             })
             .catch(function(error) {
                 $log.error("Error:", error);
@@ -35,7 +35,7 @@
             });
 
         adminPostListCtrl.prepareDelete = function(item) {
-            adminPostListCtrl.posts.$remove(item)
+            new Post(item.$id).$delete()
                 .then(function(ref) {
                     $log.info("Item deleted");
                     toastr.info("Item deleted");

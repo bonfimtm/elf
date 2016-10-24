@@ -21,6 +21,7 @@
 
                 var obj;
                 var ref = firebase.database().ref("posts");
+                var findPublished = firebase.database().ref("queries/posts/findPublished");
 
                 if (id) {
                     obj = $firebaseObject(ref.child(id));
@@ -36,21 +37,41 @@
                     var now = new Date().getTime();
                     obj.createdAt = now;
                     obj.updatedAt = now;
+                    obj.$priority = -now;
 
-                    return obj.$save();
+                    return obj.$save().then(function(data) {
+                        updateQueries(data.key, obj);
+                    });
                 };
 
                 obj.$edit = function() {
 
                     var now = new Date().getTime();
                     obj.updatedAt = now;
+                    obj.$priority = -now;
 
-                    return obj.$save();
+                    return obj.$save().then(function(data) {
+                        updateQueries(data.key, obj);
+                    });
                 };
 
                 obj.$delete = function() {
-                    return obj.$remove();
+                    return obj.$remove().then(function(data) {
+                        updateQueries(data.key);
+                    });;
                 };
+
+                function updateQueries(key, item) {
+                    updateFindPublished(key, item);
+                }
+
+                function updateFindPublished(key, item) {
+                    if (item && item.publish) {
+                        findPublished.child(key).set(true);
+                    } else {
+                        findPublished.child(key).remove();
+                    }
+                }
 
                 return obj;
             };
@@ -59,21 +80,31 @@
 
     .service("posts", ["$firebaseArray", function($firebaseArray) {
 
-        var ref = firebase.database().ref("posts")
+        var ref = firebase.database().ref("posts");
+        var findPublished = firebase.database().ref("queries/posts/findPublished");
 
-        var elements = this;
+        var posts = this;
 
-        elements.findAll = function() {
-            return $firebaseArray(ref.orderByChild("updatedAt"));
+        posts.findAll = function() {
+            return $firebaseArray(ref.orderByPriority());
         };
 
-        elements.findLastTen = function() {
+        posts.findLastTen = function() {
             return $firebaseArray(ref.orderByChild("updatedAt").limitToLast(10));
         };
 
-        elements.findByURL = function(url) {
+        posts.findByURL = function(url) {
             return $firebaseArray(ref.orderByChild("url").equalTo(url));
         };
+
+        posts.findPublished = function() {
+            findPublished.once('value').then(function(snapshot) {
+                var val = snapshot.val();
+                console.log(val);
+            });
+            return $firebaseArray(ref.orderByPriority());
+        };
+
     }]);
 
 })();

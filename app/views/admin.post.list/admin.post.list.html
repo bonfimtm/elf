@@ -1,7 +1,7 @@
 <h2><i class="fa fa-fw fa-newspaper-o"></i> Posts</h2>
 
 <div class="table-responsive">
-	<table class="table table-bordered table-striped table-hover" ng-table="adminPostListCtrl.tableParams" show-filter="true">
+	<table class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
 				<th width="40%">Title</th>
@@ -17,11 +17,11 @@
 					<i class="fa fa-fw fa-refresh fa-spin fa-3x"></i>
 				</td>
 			</tr>
-			<tr ng-repeat="(key, item) in $data">
-				<td>{{ item.title }}</td>
+			<tr ng-repeat="(key, item) in adminPostListCtrl.posts">
+				<td ng-bind="item.title"></td>
 				<td ng-bind="item.createdAt | date:'dd/MM/yyyy'"></td>
 				<td ng-bind="item.updatedAt | date:'dd/MM/yyyy'"></td>
-				<td>{{ item.publish ? "Yes" : "No" }}</td>
+				<td ng-bind="item.publish ? 'Yes' : 'No'"></td>
 				<td>
 					<a href class="btn btn-default btn-xs" ui-sref="admin.post.view({ id: item.$id })"><i class="fa fa-fw fa-search"></i></a>
 					<a href class="btn btn-default btn-xs" ui-sref="admin.post.edit({ id: item.$id })"><i class="fa fa-fw fa-edit"></i></a>
