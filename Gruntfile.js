@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-	  
+
     /*
      * Lê os metadados a partir do arquivo package.json
      */
@@ -15,41 +15,60 @@ module.exports = function(grunt) {
       '*/\n',
     src: 'app',
     build: 'dist',
-    
+    bower_dir: 'bower_components',
+
     // Task configuration.
     /*
      * Limpa diretório de saída
      */
     clean: {
-	  pre: {
-	    src: ['<%= build %>/**']
-	  },
-	  post: {
-		src: ['<%= build %>/app.js', '<%= build %>/assets/css/app.css']
-	  }
-	},
-    
+      pre: {
+        src: ['<%= build %>/**']
+      },
+      post: {
+        src: [
+          '<%= build %>/lib.js',
+          '<%= build %>/assets/css/lib.css',
+          '<%= build %>/app.js',
+          '<%= build %>/assets/css/app.css'
+        ]
+      }
+    },
+
     /*
      * Copia arquivos que não sejam HTML, JS ou CSS.
      */
     copy: {
       main: {
-        files: [
-            {
-              expand: true,
-              cwd: '<%= src %>',
-              src: ['WEB-INF/**',
-                    'assets/fonts/**',
-                    'assets/images/**',
-                    '**/*.html'],
-              dest: '<%= build %>/',
-              filter: 'isFile'
-            },
+        files: [{
+          expand: true,
+          cwd: '<%= src %>',
+          src: ['WEB-INF/**',
+            'assets/favicon/**',
+            'assets/fonts/**',
+            'assets/img/**',
+            'components/**/img/**',
+            'components/**/*.html',
+            'views/**/img/**',
+            'views/**/*.html',
+            'views/**/*.json',
+            '404.html',
+            '500.html',
+            'index.html'
           ],
-        },
+          dest: '<%= build %>/',
+          filter: 'isFile'
+        }, {
+          expand: true,
+          cwd: '<%= src %>/<%= bower_dir %>/font-awesome/fonts/',
+          src: ['**'],
+          dest: '<%= build %>/assets/fonts',
+          filter: 'isFile'
+        }]
+      }
     },
-    
-    /* 
+
+    /*
      * Concatena arquivos JS e CSS.
      */
     concat: {
@@ -60,18 +79,60 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-        	'<%= build %>/app.js': ['<%= src %>/app.js',
-                                    '<%= src %>/components/**/*.js',
-                                    '<%= src %>/views/**/*.js',
-                                    '<%= src %>/services/**/*.js',],
-            '<%= build %>/assets/css/app.css': ['<%= src %>/assets/css/*.css',
-                                                 '<%= src %>/components/**/*.css',
-                                                 '<%= src %>/views/**/*.css']
+          '<%= build %>/modernizr.min.js': [
+            '<%= src %>/<%= bower_dir %>/html5-boilerplate/src/js/vendor/modernizr-2.8.3.min.js'
+          ],
+          '<%= build %>/lib.js': [
+            '<%= src %>/<%= bower_dir %>/angular/angular.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-touch/angular-touch.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-animate/angular-animate.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-loader/angular-loader.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-mocks/angular-mocks.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-bootstrap/ui-bootstrap.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-bootstrap/ui-bootstrap-tpls.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-messages/angular-messages.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-ui-mask/dist/mask.js',
+            '<%= src %>/<%= bower_dir %>/angular-i18n/angular-locale_pt-br.js',
+            '<%= src %>/<%= bower_dir %>/angular-translate/angular-translate.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-resource/angular-resource.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-loading-bar/build/loading-bar.min.js',
+            '<%= src %>/<%= bower_dir %>/firebase/firebase.js',
+            '<%= src %>/<%= bower_dir %>/angularfire/dist/angularfire.min.js',
+            '<%= src %>/<%= bower_dir %>/ng-table/dist/ng-table.min.js',
+            '<%= src %>/<%= bower_dir %>/ng-file-upload/ng-file-upload-all.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-toastr/dist/angular-toastr.tpls.min.js',
+            '<%= src %>/<%= bower_dir %>/ngSweetAlert/SweetAlert.min.js',
+            '<%= src %>/<%= bower_dir %>/sweetalert/dist/sweetalert.min.js',
+            '<%= src %>/<%= bower_dir %>/angular-ui-router/release/angular-ui-router.min.js'
+          ],
+          '<%= build %>/app.js': [
+            '<%= src %>/components/**/*.js',
+            '<%= src %>/services/**/*.js',
+            '<%= src %>/views/**/*.js',
+            '<%= src %>/app.js'
+          ],
+          '<%= build %>/assets/css/lib.css': [
+            '<%= src %>/<%= bower_dir %>/bootstrap/dist/css/bootstrap.min.css',
+            '<%= src %>/<%= bower_dir %>/angular-bootstrap/ui-bootstrap-csp.css',
+            '<%= src %>/<%= bower_dir %>/angular-loading-bar/build/loading-bar.min.css',
+            '<%= src %>/<%= bower_dir %>/font-awesome/css/font-awesome.min.css',
+            '<%= src %>/<%= bower_dir %>/ng-table/dist/ng-table.min.css',
+            '<%= src %>/<%= bower_dir %>/angular-toastr/dist/angular-toastr.min.css',
+            '<%= src %>/<%= bower_dir %>/sweetalert/dist/sweetalert.css'
+          ],
+          '<%= build %>/assets/css/app.css': [
+            '<%= src %>/components/**/*.css',
+            '<%= src %>/assets/css/*.css',
+            '<%= src %>/fonts.css',
+            '<%= src %>/app.css',
+            '<%= src %>/views/**/*.css'
+          ]
         }
       }
     },
-    
-    /* 
+
+    /*
      * Minifica arquivos JS.
      */
     uglify: {
@@ -82,59 +143,64 @@ module.exports = function(grunt) {
       dist: {
         src: '<%= build %>/app.js',
         dest: '<%= build %>/app.min.js'
+      },
+      lib: {
+        src: '<%= build %>/lib.js',
+        dest: '<%= build %>/lib.min.js'
       }
     },
-    
-    /* 
+
+    /*
      * Minifica arquivos CSS.
      */
     cssmin: {
       options: {
-        shorthandCompacting: false,
+        shorthandCompacting: true,
         roundingPrecision: -1
       },
       target: {
         files: {
-        	'<%= build %>/assets/css/app.min.css': ['<%= build %>/assets/css/app.css']
+          '<%= build %>/assets/css/app.min.css': ['<%= build %>/assets/css/app.css'],
+          '<%= build %>/assets/css/lib.min.css': ['<%= build %>/assets/css/lib.css']
         }
       }
     },
-    
-    /* 
+
+    /*
      * Altera os imports JS e CSS para
      * os arquivos minificados.
      */
-	processhtml: {
-		processhtml: {
-	      files: {
-	    	  '<%= build %>/index.html': ['<%= build %>/index.html']
-	      }
-		}
-	},
-    
-    /* 
+    processhtml: {
+      processhtml: {
+        files: {
+          '<%= build %>/index.html': ['<%= build %>/index.html']
+        }
+      }
+    },
+
+    /*
      * Minifica arquivos HTML.
      */
-    htmlmin: { 
-		dist: { 
-		  options: {
-		    removeComments: true,
-		    collapseWhitespace: true,
-		    minifyJS: true,
-		    minifyCSS: true
-		  },
-		  files: [{
-			  expand: true,
-              cwd: '<%= build %>',
-              src: '**/*.html', // FIXME _thiago.bonfim Ignorar bower_components
-              dest: '<%= build %>'
-		  }]
-		}
-	},
-    
-    
-    /* 
-     * Verifica boas práticas de codificação
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true,
+          minifyJS: true,
+          minifyCSS: true
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= build %>',
+          src: '**/*.html',
+          dest: '<%= build %>'
+        }]
+      }
+    },
+
+
+    /*
+     * Verifica boas prÃ¡ticas de codificaÃ§Ã£o
      * nos arquivos JS.
      */
     jshint: {
@@ -152,24 +218,28 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true,
         globals: {
-        	module:true,
-        	angular: true
+          module: true,
+          angular: true,
+          firebase: true,
+          slug: true
         }
       },
       gruntfile: {
         src: 'Gruntfile.js'
       },
       app: {
-        src: ['<%= src %>/app.js',
-              '<%= src %>/components/**/*.js',
-              '<%= src %>/views/**/*.js',
-              '<%= src %>/services/**/*.js',]
+        src: [
+          '<%= src %>/app.js',
+          '<%= src %>/services/**/*.js',
+          '<%= src %>/views/**/*.js',
+          '<%= src %>/components/**/*.js'
+        ]
       }
     },
-    
-    /* 
+
+    /*
      * Executa tarefas ao verificar
-     * mudanças no sistema de arquivos.
+     * mudanÃ§as no sistema de arquivos.
      */
     watch: {
       gruntfile: {
@@ -182,8 +252,8 @@ module.exports = function(grunt) {
       }
     }
   });
-  
-  /* 
+
+  /*
    * Registra tarefas.
    */
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -195,17 +265,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  
+
   /*
-   * Registra tarefa padrão
+   * Registra tarefa padrÃ£o
    */
-  grunt.registerTask('default', ['jshint',
-                                 'clean:pre',
-                                 'copy',
-                                 'concat',
-                                 'uglify',
-                                 'cssmin',
-                                 'processhtml',
-                                 'htmlmin',
-                                 'clean:post']);
+  grunt.registerTask('default', [
+    'jshint',
+    'clean:pre',
+    'copy',
+    'concat',
+    'uglify',
+    'cssmin',
+    'processhtml',
+    'htmlmin',
+    'clean:post'
+  ]);
 };

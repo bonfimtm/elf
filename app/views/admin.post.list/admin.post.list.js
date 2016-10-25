@@ -13,7 +13,7 @@
         });
     })
 
-    .controller('AdminPostListCtrl', ['$log', 'Post', 'posts', 'toastr', 'NgTableParams', function($log, Post, posts, toastr, NgTableParams) {
+    .controller('AdminPostListCtrl', ['$log', 'Post', 'posts', 'toastr', function($log, Post, posts, toastr) {
 
         var adminPostListCtrl = this;
 
@@ -36,7 +36,7 @@
 
         adminPostListCtrl.prepareDelete = function(item) {
             new Post(item.$id).$delete()
-                .then(function(ref) {
+                .then(function() {
                     $log.info("Item deleted");
                     toastr.info("Item deleted");
                 })

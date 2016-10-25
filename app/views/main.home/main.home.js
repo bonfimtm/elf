@@ -23,7 +23,7 @@
 
             mainHomeCtrl.posts.$loaded()
                 .then(function(data) {
-                    $log.log(data);
+                    $log.log("main.home", data);
                 })
                 .catch(function(error) {
                     $log.error("Error:", error);

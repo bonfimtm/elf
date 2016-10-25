@@ -19,21 +19,15 @@
             url: '/login',
             templateUrl: 'views/login/login.html',
             controller: 'LoginCtrl',
-            controllerAs: 'loginCtrl',
-            resolve: {
-                // controller will not be loaded until $waitForSignIn resolves
-                // Auth refers to our $firebaseAuth wrapper in the factory below
-                "currentAuth": ["Auth", function(Auth) {
-                    // $waitForSignIn returns a promise so the resolve waits for it to complete
-                    return Auth.$waitForSignIn();
-                }]
-            }
+            controllerAs: 'loginCtrl'
         });
     })
 
     .controller('LoginCtrl', ['$log', 'Auth', 'toastr', '$state',
                                 function($log, Auth, toastr, $state) {
         var loginCtrl = this;
+        
+        console.log("loginCtrl");
 
         loginCtrl.submit = function() {
             loginCtrl.loading = true;

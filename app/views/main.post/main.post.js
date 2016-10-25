@@ -6,7 +6,7 @@
     .config(function($stateProvider) {
 
         $stateProvider.state('main.post', {
-            url: '/:url',
+            url: '/post/:url',
             templateUrl: 'views/main.post/main.post.html',
             controller: 'MainPostCtrl',
             controllerAs: 'mainPostCtrl'

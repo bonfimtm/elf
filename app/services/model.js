@@ -58,7 +58,7 @@
                 obj.$delete = function() {
                     return obj.$remove().then(function(data) {
                         updateQueries(data.key);
-                    });;
+                    });
                 };
 
                 function updateQueries(key, item) {
@@ -81,7 +81,7 @@
     .service("posts", ["$firebaseArray", function($firebaseArray) {
 
         var ref = firebase.database().ref("posts");
-        var findPublished = firebase.database().ref("queries/posts/findPublished");
+        // var findPublished = firebase.database().ref("queries/posts/findPublished");
 
         var posts = this;
 
@@ -98,10 +98,6 @@
         };
 
         posts.findPublished = function() {
-            findPublished.once('value').then(function(snapshot) {
-                var val = snapshot.val();
-                console.log(val);
-            });
             return $firebaseArray(ref.orderByPriority());
         };
 

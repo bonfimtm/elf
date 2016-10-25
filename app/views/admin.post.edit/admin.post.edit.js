@@ -38,7 +38,7 @@
 
         adminPostEditCtrl.init = function() {
             if ($stateParams.id) {
-                adminPostEditCtrl.post = Post($stateParams.id);
+                adminPostEditCtrl.post = new Post($stateParams.id);
 
                 adminPostEditCtrl.post.$loaded()
                     .then(function(data) {
@@ -48,7 +48,7 @@
                         $log.error("Cannot load the post:", error);
                     })
                     .finally(function() {
-                        adminPostViewCtrl.loading = false;
+                        adminPostEditCtrl.loading = false;
                     });
 
             } else {

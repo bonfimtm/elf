@@ -16,7 +16,6 @@
     .controller('AdminPostViewCtrl', ['$log', '$stateParams', 'Post', 'toastr', function($log, $stateParams, Post, toastr) {
 
         var adminPostViewCtrl = this;
-        var postsRef = firebase.database().ref().child("posts");
 
         adminPostViewCtrl.init = function() {
             if ($stateParams.id) {
@@ -31,7 +30,7 @@
                         $log.error("Cannot load the post:", error);
                     });
             } else {
-                log.error("Invalid URL");
+                $log.error("Invalid URL");
                 toastr.erro("Invalid URL");
             }
         };

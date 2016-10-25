@@ -12,8 +12,6 @@
         'elf.main',
         'elf.login',
         'elf.admin',
-        'elf.view1',
-        'elf.view2',
 
         // AngularJS
         'ngAnimate',

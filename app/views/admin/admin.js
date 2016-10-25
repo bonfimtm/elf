@@ -25,11 +25,12 @@
 
     .config(function($stateProvider) {
 
-        $stateProvider.
+        $stateProvider
 
-            state('admin', {
+            .state('admin', {
                 url: '/admin',
                 templateUrl: 'views/admin/admin.html',
+                abstract: true,
                 resolve: {
                     // controller will not be loaded until $requireSignIn resolves
                     // Auth refers to our $firebaseAuth wrapper in the factory below
@@ -43,11 +44,12 @@
 
             .state('admin.post', {
                 url: '/post',
+                abstract: true,
                 template: '<ui-view></ui-view>'
             });
     })
 
-    .controller('AdminNavbarCtrl', ['Auth', '$state', function(Auth, $state) {
+    .controller('AdminNavbarCtrl', ['Auth', function(Auth) {
         var adminNavbarCtrl = this;
 
         adminNavbarCtrl.currentUserEmail = Auth.$getAuth().email;

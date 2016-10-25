@@ -9,6 +9,12 @@ body {
 	border: none;
 }
 
+@media screen and (max-width: 320px) {
+	.navbar-brand {
+		padding-left: 0;
+	}
+}
+
 input.ng-valid.ng-dirty,
 select.ng-valid.ng-dirty,
 textarea.ng-valid.ng-dirty {
