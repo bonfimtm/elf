@@ -17,6 +17,11 @@
 					<i class="fa fa-fw fa-refresh fa-spin fa-3x"></i>
 				</td>
 			</tr>
+			<tr ng-if="!adminPostListCtrl.loading && adminPostListCtrl.posts.length === 0">
+				<td colspan="6" class="text-center text-muted">
+					No posts
+				</td>
+			</tr>
 			<tr ng-repeat="(key, item) in adminPostListCtrl.posts">
 				<td ng-bind="item.title"></td>
 				<td ng-bind="item.createdAt | date:'dd/MM/yyyy'"></td>

@@ -31,6 +31,7 @@
     "angular-toastr": "^2.1.1",
     "font-awesome": "^4.6.3",
     "slug": "^0.9.1",
-    "ng-table": "^1.0.0"
+    "ng-table": "^1.0.0",
+    "ngSweetAlert": "angular-sweetalert#^1.1.1"
   }
 }

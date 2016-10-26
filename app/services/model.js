@@ -32,7 +32,7 @@
 
                 obj.$create = function() {
 
-                    obj.url = slug(obj.title);
+                    obj.url = slug(obj.title).toLowerCase();
 
                     var now = new Date().getTime();
                     obj.createdAt = now;
