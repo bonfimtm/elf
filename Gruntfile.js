@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     /*
-     * Lê os metadados a partir do arquivo package.json
+     * Reads package.json metadata
      */
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 
     // Task configuration.
     /*
-     * Limpa diretório de saída
+     * Cleans output directory
      */
     clean: {
       pre: {
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     },
 
     /*
-     * Copia arquivos que não sejam HTML, JS ou CSS.
+     * Copies files that are not HTML, JS or CSS.
      */
     copy: {
       main: {
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
     },
 
     /*
-     * Concatena arquivos JS e CSS.
+     * Concatenates JS and CSS files.
      */
     concat: {
       options: {
@@ -133,7 +133,7 @@ module.exports = function(grunt) {
     },
 
     /*
-     * Minifica arquivos JS.
+     * Uglifies JS files.
      */
     uglify: {
       options: {
@@ -151,7 +151,7 @@ module.exports = function(grunt) {
     },
 
     /*
-     * Minifica arquivos CSS.
+     * Minifies CSS files.
      */
     cssmin: {
       options: {
@@ -167,8 +167,8 @@ module.exports = function(grunt) {
     },
 
     /*
-     * Altera os imports JS e CSS para
-     * os arquivos minificados.
+     * Changes JS and CSS imports
+     * on minified files
      */
     processhtml: {
       processhtml: {
@@ -179,7 +179,7 @@ module.exports = function(grunt) {
     },
 
     /*
-     * Minifica arquivos HTML.
+     * Minifies HTML files.
      */
     htmlmin: {
       dist: {
@@ -200,8 +200,7 @@ module.exports = function(grunt) {
 
 
     /*
-     * Verifica boas prÃ¡ticas de codificaÃ§Ã£o
-     * nos arquivos JS.
+     * Checks JS best practices
      */
     jshint: {
       options: {
@@ -238,8 +237,8 @@ module.exports = function(grunt) {
     },
 
     /*
-     * Executa tarefas ao verificar
-     * mudanÃ§as no sistema de arquivos.
+     * Perform tasks when file
+     * system changes.
      */
     watch: {
       gruntfile: {
@@ -254,7 +253,7 @@ module.exports = function(grunt) {
   });
 
   /*
-   * Registra tarefas.
+   * Loads tasks
    */
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -267,7 +266,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   /*
-   * Registra tarefa padrÃ£o
+   * Register default task
    */
   grunt.registerTask('default', [
     'jshint',
