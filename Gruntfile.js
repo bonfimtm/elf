@@ -104,7 +104,8 @@ module.exports = function(grunt) {
             '<%= src %>/<%= bower_dir %>/angular-toastr/dist/angular-toastr.tpls.min.js',
             '<%= src %>/<%= bower_dir %>/ngSweetAlert/SweetAlert.min.js',
             '<%= src %>/<%= bower_dir %>/sweetalert/dist/sweetalert.min.js',
-            '<%= src %>/<%= bower_dir %>/angular-ui-router/release/angular-ui-router.min.js'
+            '<%= src %>/<%= bower_dir %>/angular-ui-router/release/angular-ui-router.min.js',
+            '<%= src %>/<%= bower_dir %>/slug/slug.js'
           ],
           '<%= build %>/app.js': [
             '<%= src %>/components/**/*.js',
@@ -269,7 +270,6 @@ module.exports = function(grunt) {
    * Register default task
    */
   grunt.registerTask('default', [
-    'jshint',
     'clean:pre',
     'copy',
     'concat',
