@@ -20,7 +20,7 @@
             return function(id) {
 
                 var obj;
-                var ref = firebase.database().ref("posts");
+                var ref = firebase.database().ref("elf/posts");
                 var findPublished = firebase.database().ref("queries/posts/findPublished");
 
                 if (id) {
@@ -80,8 +80,8 @@
 
     .service("posts", ["$firebaseArray", function($firebaseArray) {
 
-        var ref = firebase.database().ref("posts");
-        // var findPublished = firebase.database().ref("queries/posts/findPublished");
+        var ref = firebase.database().ref("elf/posts");
+        // var findPublished = firebase.database().ref("elf/queries/posts/findPublished");
 
         var posts = this;
 
